@@ -43,4 +43,4 @@ jobs:
       run: npm install -g surge
     
     - name: deploying on surge
-      run: surge ./aliimran-piaicbootcamp-expensetracker.surge.sh/ --token ${{secrets.SURGE_TOKEN}}
+      run: surge ./build aliimran-piaicbootcamp-expensetracker.surge.sh/ --token ${{secrets.SURGE_TOKEN}}
