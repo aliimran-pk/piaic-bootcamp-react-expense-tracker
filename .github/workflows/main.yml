@@ -1,4 +1,3 @@
-
 # This is a basic workflow to help you get started with Actions
 
 name: PIAIC BootCamp - Expense Tracker
@@ -8,7 +7,6 @@ name: PIAIC BootCamp - Expense Tracker
 on:
   push:
     branches: [ master ]
-
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -22,16 +20,27 @@ jobs:
     # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
     - uses: actions/checkout@v2
 
-    # Runs a single command using the runners shell
-    - name: installing Node Module
+    - name: Setup Node.js environment
       uses: actions/setup-node@v2-beta
       with:
-        node-version:  12 
-        run: echo Hello, world!
-
-    # Runs a set of commands using the runners shell
-    - name: Installing Surge
-      run: npm install --global surge
-      
-    - name: Deploying Using Surge
-      run: surge ./ aliimran-piaicbootcamp-expensetracker.surge.sh --token ${{secrets.SURGE_TOKEN}}
+        version: 12
+        
+    - name: GitHub Action for Yarn
+      uses: Borales/actions-yarn@v2.1.0
+      with:
+        # Yarn command
+        cmd: install # npm install/ yarn install
+    
+#    - name: installing tachyons  
+ #     run: npm install tachyons
+  
+    - name: Creating build
+      run: yarn build
+      env:
+          CI: false
+    
+    - name: installing surge  
+      run: npm install -g surge
+    
+    - name: deploying on surge
+      run: surge ./aliimran-piaicbootcamp-expensetracker.surge.sh/ --token ${{secrets.SURGE_TOKEN}}
