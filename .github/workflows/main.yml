@@ -33,11 +33,18 @@ jobs:
     
 #    - name: installing tachyons  
  #     run: npm install tachyons
-  
+
+    - name: npm tostify
+      run: npm install --save react-toastify
+
+    - name: Adding tostify
+      run: yarn add react-tostify
+
     - name: Creating build
       run: yarn build
       env:
           CI: false
+    
     
     - name: installing surge  
       run: npm install -g surge
