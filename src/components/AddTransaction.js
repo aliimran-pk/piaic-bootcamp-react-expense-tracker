@@ -1,9 +1,12 @@
 
 import React, {useState, useContext} from 'react'
 import { GlobalContext } from '../context/GlobalState';
+import { toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 
 export const AddTransaction = () => {
 
+  toast.configure()
   const { addTransaction } = useContext(GlobalContext); // Get methoed from GlobalState Provider
 
   const [newTransDesc, setDesc]     = useState('');
@@ -12,8 +15,8 @@ export const AddTransaction = () => {
     const onFormSubmitHandler = evnt => {
     evnt.preventDefault(); // disable page refresh
 
-    if (Number(newTransAmount) === 0) {
-      alert("Transaction Amount should be greater than zero");
+    if (Number(newTransAmount) === 0) {      
+      toast.error('Transaction Amount should be greater than zero', {position: toast.POSITION.BOTTOM_CENTER,autoClose:1000})
       return false;
     }
 
@@ -28,11 +31,14 @@ export const AddTransaction = () => {
     //Reset Values
     setDesc('');
     setAmount(0)
+
+    toast.success('Transaction added successfully', {position: toast.POSITION.BOTTOM_CENTER,autoClose:2000})
+
   }
 
   return (
     <>
-      <h3>ENTER NEW TRANSACTION</h3>
+      <h3>NEW TRANSACTION</h3>
       
       <form onSubmit={onFormSubmitHandler}>
         <div className="form-control">
@@ -40,7 +46,7 @@ export const AddTransaction = () => {
           <input type="text" value={newTransDesc} onChange={(e) => setDesc(e.target.value)} placeholder="Enter Transaction Description..." />
         </div>
         <div className="form-control">
-          <label htmlFor="amount">AMOUNT <span> (Add + for Income & - for Expense)</span></label> 
+          <label htmlFor="amount">Amount<span> (Add + for Income & - for Expense)</span></label> 
           <input type="number" value={newTransAmount} onChange={(e) => setAmount(e.target.value)} placeholder="Enter Transaction Amount..." />
         </div>
         <button className="btn">ADD</button>
