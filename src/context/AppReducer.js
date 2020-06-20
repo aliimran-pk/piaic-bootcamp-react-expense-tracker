@@ -2,18 +2,17 @@
 
 export default (state, action) => {
     switch(action.type) {
-        //Send down all the transactions except the value to delete
-        case 'DELETE_TRANSACTION':
-            return {
-                ...state,  //spread operator
-                transactions: state.transactions.filter(trasanction => trasanction.id !== action.payload)
-            }
-        case 'ADD_TRANSACTION':
-            return {
-                ...state, //initial state by spread operator ...
-                transactions: [action.payload, ...state.transactions]
-            }
-        default:
-            return state;
+      case 'DELETE_TRANSACTION':
+        return {
+          ...state,
+          transactions: state.transactions.filter(transaction => transaction.transId !== action.payload)
+        }
+      case 'ADD_TRANSACTION':
+        return {
+          ...state,
+          transactions: [action.payload, ...state.transactions]
+        }
+      default:
+        return state;
     }
-}
+  }
