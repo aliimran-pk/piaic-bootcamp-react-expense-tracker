@@ -39,6 +39,9 @@ jobs:
       env:
           CI: false
     
+    - name: Adding tostify
+      run: yarn add react-tostify
+    
     - name: installing surge  
       run: npm install -g surge
     
