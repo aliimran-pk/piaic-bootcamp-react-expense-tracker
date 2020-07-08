@@ -16,7 +16,7 @@ export const Header = () => {
     
     return (
         <h1>
-           {"Expense Tracker by Ali Imran (PIAIC50192)"}
+           {"Expense Tracker(v2) by Ali Imran (PIAIC50192)"}
         </h1>
     )
 }
